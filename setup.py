@@ -1,8 +1,8 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from distutils.command.install import install
 import os
 
-class PostInstallClean(install):
+class PreInstallClean(install):
     # Calls the default run command, then deletes build directories
     def run(self):
         os.system('rm -rf ./build ./dist ./*.pyc ./*.tgz ./*.egg-info')
@@ -13,8 +13,7 @@ setup(
     version='0.1.0',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
-    scripts=[ 'script/cli-compiler' ],
-    packages=[ 'lib' ],
+    packages=find_packages(),
     url='http://seppaleinen.github.io/cli-compiler',
     zip_safe=True,
     license='GPLv3',
@@ -30,5 +29,9 @@ setup(
         "click==5.1",
     ],
     test_suite='tests',
-    cmdclass={'install': PostInstallClean},
+    cmdclass={'install': PreInstallClean},
+    entry_points='''
+        [console_scripts]
+        cli-compiler=your_package.manager:cli 
+    ''',
 )
