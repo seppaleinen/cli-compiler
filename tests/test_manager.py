@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from lib.manager import hello
+# from lib.manager import hello
 
 
 class doCompilerTests(unittest.TestCase):
